@@ -1,10 +1,18 @@
 package main
 
-import "net/http"
+import (
+	"log"
+	"net/http"
+
+	"github.com/heismyke/checkout_backend/handler"
+)
 
 func main(){
 
-	http.HandleFunc("/products", func(w http.ResponseWriter, r *http.Request){
+	http.HandleFunc("/products", handler.HandleCreatePaymentIntent)
 
-	})
+	var err error = http.ListenAndServe("localhost:8080", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
